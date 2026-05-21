@@ -1,4 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+import PublicOnlyRoute from './components/PublicOnlyRoute.jsx'
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
@@ -13,22 +15,22 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/welcome" element={<WelcomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/przepisy" element={<DataPage type="przepisy" />} />
-      <Route path="/dodaj-skladniki" element={<DataPage type="dodaj-skladniki" />} />
-      <Route path="/kontakt" element={<SimplePage title="Kontakt" />} />
-      <Route path="/jak-to-dziala" element={<SimplePage title="Jak to działa?" />} />
-      <Route path="/o-nas" element={<SimplePage title="O nas" />} />
-      <Route path="/moje-skladniki" element={<DataPage type="dodaj-skladniki" />} />
-      <Route path="/ulubione" element={<DataPage type="ulubione" />} />
-      <Route path="/ostatnio-przegladane" element={<DataPage type="ostatnio-przegladane" />} />
-      <Route path="/plan-posilkow" element={<DataPage type="plan-posilkow" />} />
-      <Route path="/lista-zakupow" element={<DataPage type="lista-zakupow" />} />
-      <Route path="/ustawienia" element={<SettingsPage />} />
-      <Route path="/przepis/:id" element={<RecipeDetailsPage />} />
-      <Route path="/kategoria/:slug" element={<CategoryPage />} />
+      <Route path="/welcome" element={<ProtectedRoute><WelcomePage /></ProtectedRoute>} />
+      <Route path="/login" element={<PublicOnlyRoute><LoginPage /></PublicOnlyRoute>} />
+      <Route path="/register" element={<PublicOnlyRoute><RegisterPage /></PublicOnlyRoute>} />
+      <Route path="/przepisy" element={<ProtectedRoute><DataPage type="przepisy" /></ProtectedRoute>} />
+      <Route path="/dodaj-skladniki" element={<ProtectedRoute><DataPage type="dodaj-skladniki" /></ProtectedRoute>} />
+      <Route path="/kontakt" element={<ProtectedRoute><SimplePage title="Kontakt" /></ProtectedRoute>} />
+      <Route path="/jak-to-dziala" element={<ProtectedRoute><SimplePage title="Jak to działa?" /></ProtectedRoute>} />
+      <Route path="/o-nas" element={<ProtectedRoute><SimplePage title="O nas" /></ProtectedRoute>} />
+      <Route path="/moje-skladniki" element={<ProtectedRoute><DataPage type="dodaj-skladniki" /></ProtectedRoute>} />
+      <Route path="/ulubione" element={<ProtectedRoute><DataPage type="ulubione" /></ProtectedRoute>} />
+      <Route path="/ostatnio-przegladane" element={<ProtectedRoute><DataPage type="ostatnio-przegladane" /></ProtectedRoute>} />
+      <Route path="/plan-posilkow" element={<ProtectedRoute><DataPage type="plan-posilkow" /></ProtectedRoute>} />
+      <Route path="/lista-zakupow" element={<ProtectedRoute><DataPage type="lista-zakupow" /></ProtectedRoute>} />
+      <Route path="/ustawienia" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+      <Route path="/przepis/:id" element={<ProtectedRoute><RecipeDetailsPage /></ProtectedRoute>} />
+      <Route path="/kategoria/:slug" element={<ProtectedRoute><CategoryPage /></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/welcome" replace />} />
     </Routes>
   )

@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { logoutUser } from '../services/authService.js'
 
 const mainItems = [
@@ -18,10 +17,11 @@ const accountItems = [
 
 function SideMenu() {
   const navigate = useNavigate()
+  const location = useLocation()
   return (
     <aside className="side-menu">
       {mainItems.map((item, idx) => (
-        <Link className={`menu-item nav-link ${idx === 0 ? 'active' : ''}`} to={item.to} key={item.label}>
+        <Link className={`menu-item nav-link ${location.pathname === item.to ? 'active' : ''}`} to={item.to} key={item.label}>
           {item.label}
         </Link>
       ))}
