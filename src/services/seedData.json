@@ -1,0 +1,15 @@
+{
+  "ingredients": ["Pomidory", "Makaron", "Jajka", "Mleko", "Sałata", "Ser feta"],
+  "recipes": [
+    { "id": 1, "title": "Makaron z pomidorami i bazylią", "time": "20 min", "difficulty": "Średni", "category": "Dania główne", "image": "dish-pasta.png", "favorite": true, "description": "Szybki makaron na pomidorach z bazylią.", "ingredients": ["Makaron", "Pomidory", "Bazylia"], "steps": ["Ugotuj makaron", "Podsmaż pomidory", "Połącz i dopraw"] },
+    { "id": 2, "title": "Faworki", "time": "1 h", "difficulty": "Trudny", "category": "Szybkie", "image": "dish-faworki.png", "favorite": true, "description": "Kruche faworki posypane cukrem.", "ingredients": ["Mąka", "Jajka", "Śmietana"], "steps": ["Zagnieć ciasto", "Wytnij paski", "Smaż i posyp cukrem"] },
+    { "id": 3, "title": "Sałatka grecka", "time": "15 min", "difficulty": "Łatwy", "category": "Sałatki", "image": "dish-pasta.png", "favorite": false, "description": "Lekka sałatka z warzywami i fetą.", "ingredients": ["Sałata", "Ogórek", "Ser feta"], "steps": ["Pokrój warzywa", "Dodaj fetę", "Polej oliwą"] }
+  ],
+  "shoppingList": ["Mąka", "Oliwa", "Cebula", "Jogurt naturalny"],
+  "recentlyViewed": [],
+  "mealPlan": [
+    { "day": "Poniedziałek", "dish": "Makaron z pomidorami i bazylią" },
+    { "day": "Wtorek", "dish": "Sałatka grecka" },
+    { "day": "Środa", "dish": "Faworki" }
+  ]
+}
