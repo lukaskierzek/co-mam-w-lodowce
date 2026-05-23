@@ -11,6 +11,7 @@ function SettingsPage() {
   const [isAdmin, setIsAdmin] = useState(Boolean(session?.isAdmin))
   const [users, setUsers] = useState(getAllUsers())
 
+
   const onSubmit = (e) => {
     e.preventDefault()
     setError('')
