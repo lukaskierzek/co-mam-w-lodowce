@@ -2,13 +2,39 @@ import seedData from './seedData.json'
 
 const DATA_KEY = 'lodowka_data'
 
+// Dynamicznie ładuje wszystkie zdjęcia dań z folderu assets/ui/dish/
+const dishImages = import.meta.glob('../assets/ui/dish/*', { eager: true })
+
+// Buduje mapę: nazwa pliku -> url modułu
+const imageMap = Object.fromEntries(
+  Object.entries(dishImages).map(([path, module]) => {
+    const fileName = path.split('/').pop()
+    return [fileName, module.default]
+  })
+)
+
+const FALLBACK_IMAGE = imageMap['dish-no-defined.jpg']
+
+export function getImageUrl(imageName) {
+  if (!imageName) return FALLBACK_IMAGE
+  return imageMap[imageName] ?? FALLBACK_IMAGE
+}
+
 function getData() {
   const raw = localStorage.getItem(DATA_KEY)
   if (!raw) {
     localStorage.setItem(DATA_KEY, JSON.stringify(seedData))
     return seedData
   }
-  return JSON.parse(raw)
+  const stored = JSON.parse(raw)
+  // Merge new recipes from seedData with existing data
+  const existingRecipeIds = new Set(stored.recipes.map(r => r.id))
+  const newRecipes = seedData.recipes.filter(r => !existingRecipeIds.has(r.id))
+  if (newRecipes.length > 0) {
+    stored.recipes = [...stored.recipes, ...newRecipes]
+    localStorage.setItem(DATA_KEY, JSON.stringify(stored))
+  }
+  return stored
 }
 
 export function getRecipes() { return getData().recipes }

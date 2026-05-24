@@ -2,11 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard.jsx'
 import AuthedLayout from '../layouts/AuthedLayout.jsx'
-import { addIngredient, addShoppingItem, getIngredients, getMealPlan, getRecentlyViewedRecipes, getRecipes, getRecipesByCategory, getShoppingList, removeIngredient, removeShoppingItem, toggleFavorite } from '../services/dataService.js'
-import pastaImg from '../assets/ui/dish-pasta.png'
-import faworkiImg from '../assets/ui/dish-faworki.png'
-
-const mapImage = (name) => (name === 'dish-faworki.png' ? faworkiImg : pastaImg)
+import { addIngredient, addShoppingItem, getImageUrl, getIngredients, getMealPlan, getRecentlyViewedRecipes, getRecipes, getRecipesByCategory, getShoppingList, removeIngredient, removeShoppingItem, toggleFavorite } from '../services/dataService.js'
 const slugToCategory = {
   wszystkie: 'Wszystkie',
   szybkie: 'Szybkie',
@@ -77,7 +73,7 @@ function DataPage({ type, categorySlug }) {
                   <RecipeCard
                     title={r.title}
                     meta={`${r.time} | ${r.difficulty} | ${r.category}`}
-                    imageUrl={mapImage(r.image)}
+                    imageUrl={getImageUrl(r.image)}
                   />
                 </Link>
                 <button type="button" className="btn" style={{ marginTop: 8 }} onClick={() => onToggleFavorite(r.id)}>

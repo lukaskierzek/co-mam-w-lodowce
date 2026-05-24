@@ -1,10 +1,6 @@
 import { useParams } from 'react-router-dom'
 import AuthedLayout from '../layouts/AuthedLayout.jsx'
-import { addRecentlyViewed, getRecipeById, toggleFavorite } from '../services/dataService.js'
-import pastaImg from '../assets/ui/dish-pasta.png'
-import faworkiImg from '../assets/ui/dish-faworki.png'
-
-const mapImage = (name) => (name === 'dish-faworki.png' ? faworkiImg : pastaImg)
+import { addRecentlyViewed, getImageUrl, getRecipeById, toggleFavorite } from '../services/dataService.js'
 
 function RecipeDetailsPage() {
   const { id } = useParams()
@@ -16,7 +12,7 @@ function RecipeDetailsPage() {
     <AuthedLayout>
       <section className="data-page">
         <h1>{recipe.title}</h1>
-        <div className="recipe-details-image" style={{ backgroundImage: `url(${mapImage(recipe.image)})` }} />
+        <div className="recipe-details-image" style={{ backgroundImage: `url(${getImageUrl(recipe.image)})` }} />
         <p>{recipe.description}</p>
         <p><b>Czas:</b> {recipe.time} | <b>Poziom:</b> {recipe.difficulty} | <b>Kategoria:</b> {recipe.category}</p>
         <h3>Składniki</h3>
