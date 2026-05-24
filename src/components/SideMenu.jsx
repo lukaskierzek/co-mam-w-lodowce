@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { logoutUser } from '../services/authService.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
 const mainItems = [
   { label: 'Strona główna', to: '/welcome' },
@@ -18,6 +18,12 @@ const accountItems = [
 function SideMenu() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { logout } = useAuth()
+
+  const handleLogout = async () => {
+    await logout()
+    navigate('/login')
+  }
   return (
     <aside className="side-menu">
       {mainItems.map((item, idx) => (
@@ -28,7 +34,7 @@ function SideMenu() {
       <div style={{ height: 18 }} />
       {accountItems.map((item) => (
         item.label === 'Wyloguj'
-          ? <button type="button" className="menu-item nav-link" key={item.label} onClick={() => { logoutUser(); navigate('/login') }}>{item.label}</button>
+          ? <button type="button" className="menu-item nav-link" key={item.label} onClick={handleLogout}>{item.label}</button>
           : <Link className="menu-item nav-link" to={item.to} key={item.label}>{item.label}</Link>
       ))}
     </aside>

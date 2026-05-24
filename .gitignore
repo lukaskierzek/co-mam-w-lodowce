@@ -7,6 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Zmienne środowiskowe - WARNING
+.env.devprod
+.env.*.local
+
 node_modules
 dist
 dist-ssr
@@ -24,3 +28,5 @@ dist-ssr
 *.sw?
 
 projekt.zip
+
+

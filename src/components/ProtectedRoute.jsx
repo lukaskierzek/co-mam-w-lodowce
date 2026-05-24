@@ -1,12 +1,12 @@
 import { Navigate, useLocation } from 'react-router-dom'
-import { getSessionUser } from '../services/authService.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
 function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth()
   const location = useLocation()
-  const user = getSessionUser()
-  if (!user) {
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />
-  }
+
+  if (loading) return <div className="auth-loading">Ładowanie...</div>
+  if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />
   return children
 }
 

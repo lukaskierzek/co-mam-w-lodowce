@@ -1,25 +1,36 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AuthedLayout from '../layouts/AuthedLayout.jsx'
-import { getAllUsers, getSessionUser, updateSessionUser, updateUserById } from '../services/authService.js'
+import { updateSessionUser } from '../services/auth/authService.js'
+import { getAllUsers, updateUserById } from '../services/userService.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
 function SettingsPage() {
-  const session = getSessionUser()
+  const { user: session, setUser } = useAuth()
   const [email, setEmail] = useState(session?.email || '')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [isAdmin, setIsAdmin] = useState(Boolean(session?.isAdmin))
-  const [users, setUsers] = useState(getAllUsers())
+  const [users, setUsers] = useState([])
 
+  // Załaduj listę użytkowników (async – działa dla local i Firebase)
+  useEffect(() => {
+    getAllUsers().then(setUsers)
+  }, [])
 
-  const onSubmit = (e) => {
+  const refreshUsers = () => getAllUsers().then(setUsers)
+
+  const onSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setMessage('')
     try {
-      updateSessionUser({ email, password })
-      updateUserById(session.id, { isAdmin })
-      setUsers(getAllUsers())
+      const [updated] = await Promise.all([
+        updateSessionUser({ email, password }),
+        session?.id ? updateUserById(session.id, { isAdmin }) : Promise.resolve(),
+      ])
+      if (updated) setUser({ ...updated, isAdmin })
+      await refreshUsers()
       setMessage('Dane zostały zapisane.')
       setPassword('')
     } catch (err) {
@@ -39,14 +50,26 @@ function SettingsPage() {
           {message && <p style={{ color: '#2e7d32', margin: 0 }}>{message}</p>}
           <button className="btn primary" type="submit">Zapisz zmiany</button>
         </form>
-        {isAdmin && (
+        {session?.isAdmin && (
           <section style={{ marginTop: 20 }}>
             <h2>Użytkownicy</h2>
             <ul className="data-list">
               {users.map((u) => (
                 <li key={u.id}>
                   {u.name} ({u.email}){' '}
-                  <button className="btn" type="button" onClick={() => { updateUserById(u.id, { isAdmin: !u.isAdmin }); setUsers(getAllUsers()) }}>
+                  <button
+                    className="btn"
+                    type="button"
+                    onClick={async () => {
+                      const newIsAdmin = !u.isAdmin
+                      await updateUserById(u.id, { isAdmin: newIsAdmin })
+                      if (u.id === session?.id) {
+                        setUser({ ...session, isAdmin: newIsAdmin })
+                        setIsAdmin(newIsAdmin)
+                      }
+                      await refreshUsers()
+                    }}
+                  >
                     {u.isAdmin ? 'Odbierz admina' : 'Nadaj admina'}
                   </button>
                 </li>

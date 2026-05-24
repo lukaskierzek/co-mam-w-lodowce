@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import TopNav from '../components/TopNav.jsx'
-import { registerUser } from '../services/authService.js'
+import { registerUser } from '../services/auth/authService.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
 function RegisterPage() {
   const [name, setName] = useState('')
@@ -9,12 +10,14 @@ function RegisterPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const { setUser } = useAuth()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     try {
-      registerUser({ name, email, password })
+      const user = await registerUser({ name, email, password })
+      setUser(user)
       navigate('/welcome')
     } catch (err) {
       setError(err.message)

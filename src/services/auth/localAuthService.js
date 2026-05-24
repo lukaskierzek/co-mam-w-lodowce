@@ -1,4 +1,5 @@
-import seedUsers from './seedUsers.json'
+// Implementacja lokalna – localStorage (tryb DEV)
+import seedUsers from '../seedUsers.json'
 
 const USERS_KEY = 'lodowka_users'
 const SESSION_KEY = 'lodowka_session'
@@ -24,18 +25,20 @@ export function registerUser({ name, email, password }) {
   const user = { id: Date.now(), name, email, password, isAdmin: false }
   users.push(user)
   saveUsers(users)
-  localStorage.setItem(SESSION_KEY, JSON.stringify({ id: user.id, name: user.name, email: user.email, isAdmin: user.isAdmin }))
-  return user
+  const session = { id: user.id, name: user.name, email: user.email, isAdmin: user.isAdmin }
+  localStorage.setItem(SESSION_KEY, JSON.stringify(session))
+  return session
 }
 
 export function loginUser({ email, password }) {
   const users = getUsers()
-  const user = users.find((u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password)
-  if (!user) {
-    throw new Error('Nieprawidłowy email lub hasło.')
-  }
-  localStorage.setItem(SESSION_KEY, JSON.stringify({ id: user.id, name: user.name, email: user.email, isAdmin: user.isAdmin }))
-  return user
+  const user = users.find(
+    (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
+  )
+  if (!user) throw new Error('Nieprawidłowy email lub hasło.')
+  const session = { id: user.id, name: user.name, email: user.email, isAdmin: user.isAdmin }
+  localStorage.setItem(SESSION_KEY, JSON.stringify(session))
+  return session
 }
 
 export function logoutUser() {
@@ -79,3 +82,14 @@ export function updateUserById(id, patch) {
   }
   return users[index]
 }
+
+/**
+ * Subskrypcja zmian auth (tryb lokalny – synchronicznie).
+ * Wywołuje callback od razu z aktualnym użytkownikiem.
+ * Zwraca funkcję unsubscribe (no-op).
+ */
+export function subscribeToAuth(callback) {
+  callback(getSessionUser())
+  return () => {}
+}
+
