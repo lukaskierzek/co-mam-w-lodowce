@@ -2,18 +2,18 @@
 
 ## Tryby uruchomienia
 
-| Profil | Komenda | Auth | Opis                                                                         |
-|--------|---------|------|------------------------------------------------------------------------------|
-| **DEV** | `npm run dev` | 💾 localStorage | Brak Firebase, dane lokalnie w przeglądarce. Szybki start, działa offline.   |
-| **DEVPROD** | `npx vite --mode devprod` | 🔥 Firebase | Lokalny serwer dev, ale auth przez Firebase. Wymaga połączenia z internetem. |
-| **PROD** | `npm run build` | 🔥 Firebase | Todo - pewnie kiedyś może na koniec                                          |
+| Profil | Komenda | Auth        | Opis                                                                                                                 |
+|--------|---------|-------------|----------------------------------------------------------------------------------------------------------------------|
+| **DEV** | `npm run dev` | 💾 localStorage | Brak Firebase, dane lokalnie w przeglądarce. Szybki start, działa offline.                                           |
+| **DEVPROD** | `npx vite --mode devprod` | 🔥 Firebase | Lokalny serwer dev, ale auth przez Firebase. Wymaga połączenia z internetem. Dodatkowo google analitics w dev modzie |
+| **PROD** | `npm run build` | TODO        | Todo - pewnie kiedyś może na koniec                                                                                  |
 
 
 ### Wymagane pliki środowiskowe
 
 - `.env` — klucze Firebase + `VITE_USE_FIREBASE=false` (tryb DEV)
 - `.env.devprod` — klucze Firebase + `VITE_USE_FIREBASE=true` (tryb DEVPROD)
-- `.env.production` — klucze Firebase + TODO...
+- `.env.production` —TODO...
 
 > Pliki `.env` nie są commitowane do repozytorium. Skopiuj je od innego członka zespołu lub uzupełnij ręcznie na podstawie Firebase Console.
 
