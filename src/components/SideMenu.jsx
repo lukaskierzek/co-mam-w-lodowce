@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext.jsx'
+import { useAuth } from '../context/useAuth.jsx'
 
 const mainItems = [
   { label: 'Strona główna', to: '/welcome' },
@@ -26,7 +26,7 @@ function SideMenu() {
   }
   return (
     <aside className="side-menu">
-      {mainItems.map((item, idx) => (
+      {mainItems.map((item) => (
         <Link className={`menu-item nav-link ${location.pathname === item.to ? 'active' : ''}`} to={item.to} key={item.label}>
           {item.label}
         </Link>

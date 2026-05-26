@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import TopNav from '../components/TopNav.jsx'
 import { registerUser } from '../services/auth/authService.js'
-import { useAuth } from '../context/AuthContext.jsx'
+import { useAuth } from '../context/useAuth.jsx'
 
 function RegisterPage() {
   const [name, setName] = useState('')

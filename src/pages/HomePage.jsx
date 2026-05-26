@@ -1,8 +1,13 @@
+import { Link } from 'react-router-dom'
 import TopNav from '../components/TopNav.jsx'
 import RecipeCard from '../components/RecipeCard.jsx'
-import heroImg from '../assets/hero.png'
+import heroImg from '../assets/ui/fridge-hero.png'
+import jak_to_dziala from '../assets/ui/jak_to_dziala.png'
+import { getImageUrl, getRecipes } from '../services/dataService.js'
 
 function HomePage() {
+  const featuredRecipes = getRecipes().slice(0, 6)
+
   return (
     <div className="page-shell">
       <TopNav />
@@ -24,13 +29,24 @@ function HomePage() {
           <h2 className="section-title" style={{ fontSize: 48, marginTop: 0 }}>
             Jak to działa?
           </h2>
+          <img
+            src={jak_to_dziala}
+            alt="Instrukcja działania aplikacji"
+            style={{ width: '100%', borderRadius: 12, display: 'block' }}
+          />
         </section>
         <section style={{ marginTop: 26 }}>
           <h2 className="section-title">Odkryj najpopularniejsze przepisy!</h2>
           <div className="cards">
-            <RecipeCard title="Makaron z pomidorami i bazylią" meta="20 min | Średni" />
-            <RecipeCard title="Zupa krem z cukinii" meta="40 min | Łatwy" />
-            <RecipeCard title="Faworki" meta="1 h | Trudny" />
+            {featuredRecipes.map((recipe) => (
+              <Link to={`/przepis/${recipe.id}`} className="nav-link" key={recipe.id}>
+                <RecipeCard
+                  title={recipe.title}
+                  meta={`${recipe.time} | ${recipe.difficulty} | ${recipe.category}`}
+                  imageUrl={getImageUrl(recipe.image)}
+                />
+              </Link>
+            ))}
           </div>
         </section>
       </main>

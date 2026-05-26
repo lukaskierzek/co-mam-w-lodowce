@@ -22,16 +22,19 @@ function DataPage({ type, categorySlug }) {
   const [searchParams] = useSearchParams()
   const query = (searchParams.get('q') || '').toLowerCase()
 
-  const recipeBase = type === 'ulubione'
-    ? recipes.filter((r) => r.favorite)
-    : type === 'kategoria'
-      ? getRecipesByCategory(slugToCategory[categorySlug] || 'Wszystkie')
-      : type === 'ostatnio-przegladane'
-        ? getRecentlyViewedRecipes()
-        : type === 'przepisy'
-          ? recipes
-          : []
-  const recipeList = useMemo(() => recipeBase.filter((r) => r.title.toLowerCase().includes(query)), [recipeBase, query])
+  const recipeList = useMemo(() => {
+    const recipeBase = type === 'ulubione'
+      ? recipes.filter((r) => r.favorite)
+      : type === 'kategoria'
+        ? getRecipesByCategory(slugToCategory[categorySlug] || 'Wszystkie')
+        : type === 'ostatnio-przegladane'
+          ? getRecentlyViewedRecipes()
+          : type === 'przepisy'
+            ? recipes
+            : []
+
+    return recipeBase.filter((r) => r.title.toLowerCase().includes(query))
+  }, [categorySlug, query, recipes, type])
 
   const title = type === 'kategoria' ? `Kategoria: ${slugToCategory[categorySlug] || 'Wszystkie'}` : type.replace('-', ' ')
 

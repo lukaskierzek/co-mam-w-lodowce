@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { subscribeToAuth, logoutUser as serviceLogout } from '../services/auth/authService.js'
-
-const AuthContext = createContext(null)
+import { AuthContext } from './authContextValue.js'
 
 /**
  * AuthProvider – obudowuje całą aplikację.
@@ -32,12 +31,5 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   )
-}
-
-/** Hook do używania w komponentach */
-export function useAuth() {
-  const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuth musi być użyty wewnątrz <AuthProvider>')
-  return ctx
 }
 

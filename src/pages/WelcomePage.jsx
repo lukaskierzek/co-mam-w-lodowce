@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom'
 import AuthedLayout from '../layouts/AuthedLayout.jsx'
 import RecipeCard from '../components/RecipeCard.jsx'
 import heroImg from '../assets/hero.png'
+import { getImageUrl, getRecipes } from '../services/dataService.js'
 
 function WelcomePage() {
+  const recipeSuggestions = getRecipes().slice(0, 4)
+
   return (
     <AuthedLayout>
           <section className="hero">
@@ -37,8 +40,15 @@ function WelcomePage() {
           </div>
           <h2 className="section-title">Propozycje na dzisiaj:</h2>
           <div className="cards" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
-            <RecipeCard title="Makaron z pomidorami i bazylią" meta="20 min | Średni" />
-            <RecipeCard title="Faworki" meta="1 h | Trudny" />
+            {recipeSuggestions.map((recipe) => (
+              <Link to={`/przepis/${recipe.id}`} className="nav-link" key={recipe.id}>
+                <RecipeCard
+                  title={recipe.title}
+                  meta={`${recipe.time} | ${recipe.difficulty} | ${recipe.category}`}
+                  imageUrl={getImageUrl(recipe.image)}
+                />
+              </Link>
+            ))}
           </div>
     </AuthedLayout>
   )

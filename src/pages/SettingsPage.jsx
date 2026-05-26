@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import AuthedLayout from '../layouts/AuthedLayout.jsx'
 import { updateSessionUser } from '../services/auth/authService.js'
 import { getAllUsers, updateUserById } from '../services/userService.js'
-import { useAuth } from '../context/AuthContext.jsx'
+import { useAuth } from '../context/useAuth.jsx'
 
 function SettingsPage() {
   const { user: session, setUser } = useAuth()
