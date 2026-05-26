@@ -1,16 +1,50 @@
 import TopNav from '../components/TopNav.jsx'
 import SideMenu from '../components/SideMenu.jsx'
 
-function AuthedLayout({ children }) {
+import { useAuth } from '../context/useAuth.jsx'
+
+function AuthedLayout({
+  children
+}) {
+
+  const {
+    user
+  } = useAuth()
+
   return (
+
     <div className="page-shell">
-      <TopNav welcome />
-      <div className="main-grid">
-        <SideMenu />
-        <main>{children}</main>
+
+      <TopNav
+        welcome={!!user}
+      />
+
+      <div
+        className={
+          user
+            ? 'main-grid'
+            : 'main-grid guest'
+        }
+      >
+
+        {user && (
+
+          <SideMenu />
+
+        )}
+
+        <main>
+
+          {children}
+
+        </main>
+
       </div>
+
     </div>
+
   )
+
 }
 
 export default AuthedLayout

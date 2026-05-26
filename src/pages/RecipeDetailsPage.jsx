@@ -1,30 +1,216 @@
 import { useParams } from 'react-router-dom'
-import AuthedLayout from '../layouts/AuthedLayout.jsx'
-import { addRecentlyViewed, getImageUrl, getRecipeById, toggleFavorite } from '../services/dataService.js'
+
+import TopNav from '../components/TopNav.jsx'
+import SideMenu from '../components/SideMenu.jsx'
+
+import { useAuth } from '../context/useAuth.jsx'
+
+import {
+  getRecipeById,
+  addRecentlyViewed,
+  toggleFavorite,
+  getImageUrl
+} from '../services/dataService.js'
 
 function RecipeDetailsPage() {
+
   const { id } = useParams()
-  const recipe = getRecipeById(id)
-  if (recipe) addRecentlyViewed(recipe.id)
-  if (!recipe) return <AuthedLayout><section className="data-page"><h1>Nie znaleziono przepisu</h1></section></AuthedLayout>
+
+  const { user } = useAuth()
+
+  const recipe = getRecipeById(
+    Number(id)
+  )
+
+  if (!recipe) {
+
+    return (
+
+      <div className="page-shell">
+
+        <TopNav />
+
+        <section className="data-page">
+
+          <h1>
+
+            Nie znaleziono przepisu
+
+          </h1>
+
+          <p>
+
+            ID: {id}
+
+          </p>
+
+        </section>
+
+      </div>
+
+    )
+
+  }
+
+  addRecentlyViewed(
+    recipe.id
+  )
+
+  const handleFavorite = () => {
+
+    toggleFavorite(
+      recipe.id
+    )
+
+    window.location.reload()
+
+  }
 
   return (
-    <AuthedLayout>
-      <section className="data-page">
-        <h1>{recipe.title}</h1>
-        <div className="recipe-details-image" style={{ backgroundImage: `url(${getImageUrl(recipe.image)})` }} />
-        <p>{recipe.description}</p>
-        <p><b>Czas:</b> {recipe.time} | <b>Poziom:</b> {recipe.difficulty} | <b>Kategoria:</b> {recipe.category}</p>
-        <h3>Składniki</h3>
-        <ul className="data-list">{recipe.ingredients.map((x) => <li key={x}>{x}</li>)}</ul>
-        <h3>Kroki</h3>
-        <ol className="data-list">{recipe.steps.map((x) => <li key={x}>{x}</li>)}</ol>
-        <button className="btn" onClick={() => { toggleFavorite(recipe.id); window.location.reload() }}>
-          {recipe.favorite ? 'Usuń z ulubionych' : 'Dodaj do ulubionych'}
-        </button>
-      </section>
-    </AuthedLayout>
+
+    <div className="page-shell">
+
+      <TopNav
+        welcome={!!user}
+      />
+
+      <div
+        className={
+          user
+            ? 'main-grid'
+            : 'main-grid guest'
+        }
+      >
+
+        {user && (
+          <SideMenu />
+        )}
+
+        <section className="data-page">
+
+          <h1>
+
+            {recipe.title}
+
+          </h1>
+
+          <div
+            className="recipe-details-image"
+            style={{
+              backgroundImage:
+                `url(${getImageUrl(recipe.image)})`
+            }}
+          />
+
+          <p>
+
+            {recipe.description}
+
+          </p>
+
+          <p>
+
+            <strong>
+              Czas:
+            </strong>
+
+            {' '}
+            {recipe.time}
+
+            {' | '}
+
+            <strong>
+              Poziom:
+            </strong>
+
+            {' '}
+            {recipe.difficulty}
+
+            {' | '}
+
+            <strong>
+              Kategoria:
+            </strong>
+
+            {' '}
+            {recipe.category}
+
+          </p>
+
+          <h3>
+
+            Składniki
+
+          </h3>
+
+          <ul className="data-list">
+
+            {recipe.ingredients?.map(
+              ingredient => (
+
+                <li
+                  key={ingredient}
+                >
+
+                  {ingredient}
+
+                </li>
+
+              )
+            )}
+
+          </ul>
+
+          <h3>
+
+            Kroki
+
+          </h3>
+
+          <ol className="data-list">
+
+            {recipe.steps?.map(
+              step => (
+
+                <li
+                  key={step}
+                >
+
+                  {step}
+
+                </li>
+
+              )
+            )}
+
+          </ol>
+
+          {user && (
+
+            <button
+              className="btn"
+              onClick={
+                handleFavorite
+              }
+            >
+
+              {recipe.favorite
+                ? 'Usuń z ulubionych'
+                : 'Dodaj do ulubionych'
+              }
+
+            </button>
+
+          )}
+
+        </section>
+
+      </div>
+
+    </div>
+
   )
+
 }
 
 export default RecipeDetailsPage

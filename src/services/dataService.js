@@ -42,7 +42,10 @@ export function getIngredients() { return getData().ingredients }
 export function getFavorites() { return getData().recipes.filter((r) => r.favorite) }
 export function getShoppingList() { return getData().shoppingList }
 export function getMealPlan() { return getData().mealPlan }
+
+
 export function getRecipeById(id) { return getRecipes().find((r) => r.id === Number(id)) }
+
 export function getRecipesByCategory(category) {
   if (category === 'Wszystkie') return getRecipes()
   return getRecipes().filter((r) => r.category === category)
