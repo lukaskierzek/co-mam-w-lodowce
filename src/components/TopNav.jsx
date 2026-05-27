@@ -3,6 +3,11 @@ import { useState } from 'react'
 
 import { useAuth } from '../context/useAuth.jsx'
 
+import logo from '../assets/ui/logo.png'
+import bell from '../assets/ui/bell.png'
+import userIcon from '../assets/ui/user.png'
+import arrow from '../assets/ui/arrow.png'
+
 function TopNav() {
 
   const { user, logout } = useAuth()
@@ -35,18 +40,20 @@ function TopNav() {
 
     <header className="topbar">
 
-      <Link
+ <Link
   to="/"
-  className="brand"
+  className="brand nav-link"
 >
+
+  <img
+    src={logo}
+    alt="Logo"
+    className="brand-logo"
+  />
 
   <span>
 
-    Co mam w
-
-    <br />
-
-    lodówce?
+    Co mam w lodówce?
 
   </span>
 
@@ -109,22 +116,27 @@ function TopNav() {
 
             </form>
 
-            <div className="top-icons">
+<div className="top-icons">
 
-  <span>🔔</span>
+  <img
+    src={bell}
+    alt="Powiadomienia"
+    className="top-icon"
+  />
 
-  <span>👤</span>
+<img
+  src={userIcon}
+  alt="Profil"
+  className="top-icon"
+  onClick={() => navigate('/ustawienia')}
+/>
 
-  <span
-    style={{
-      cursor: 'pointer'
-    }}
+  <img
+    src={arrow}
+    alt="Wyloguj"
+    className="top-icon arrow-icon"
     onClick={logout}
-  >
-
-    ⌄
-
-  </span>
+  />
 
 </div>
           </>
