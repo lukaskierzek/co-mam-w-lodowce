@@ -33,7 +33,31 @@ function DataPage({ type, categorySlug }) {
             ? recipes
             : []
 
-    return recipeBase.filter((r) => r.title.toLowerCase().includes(query))
+    return recipeBase.filter(
+
+  recipe =>
+
+    recipe.title
+
+      .toLowerCase()
+
+      .includes(query)
+
+    ||
+
+    recipe.ingredients.some(
+
+      ingredient =>
+
+        ingredient
+
+          .toLowerCase()
+
+          .includes(query)
+
+    )
+
+)
   }, [categorySlug, query, recipes, type])
 
   const title = type === 'kategoria' ? `Kategoria: ${slugToCategory[categorySlug] || 'Wszystkie'}` : type.replace('-', ' ')

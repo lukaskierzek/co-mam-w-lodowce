@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 import AnalyticsListener from './components/AnalyticsListener.jsx'
-
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 import HomePage from './pages/HomePage.jsx'
@@ -11,8 +10,11 @@ import DataPage from './pages/DataPage.jsx'
 import SettingsPage from './pages/SettingsPage.jsx'
 import CategoryPage from './pages/CategoryPage.jsx'
 import RecipeDetailsPage from './pages/RecipeDetailsPage.jsx'
-import SimplePage from './pages/SimplePage.jsx'
 import WelcomePage from './pages/WelcomePage.jsx'
+
+import AboutPage from './pages/AboutPage.jsx'
+import ContactPage from './pages/ContactPage.jsx'
+import HowItWorksPage from './pages/HowItWorksPage.jsx'
 
 function App() {
 
@@ -43,9 +45,7 @@ function App() {
           path="/welcome"
           element={
             <ProtectedRoute>
-
               <WelcomePage />
-
             </ProtectedRoute>
           }
         />
@@ -54,11 +54,7 @@ function App() {
           path="/przepisy"
           element={
             <ProtectedRoute>
-
-              <DataPage
-                type="przepisy"
-              />
-
+              <DataPage type="przepisy" />
             </ProtectedRoute>
           }
         />
@@ -67,11 +63,7 @@ function App() {
           path="/dodaj-skladniki"
           element={
             <ProtectedRoute>
-
-              <DataPage
-                type="dodaj-skladniki"
-              />
-
+              <DataPage type="dodaj-skladniki" />
             </ProtectedRoute>
           }
         />
@@ -80,11 +72,7 @@ function App() {
           path="/moje-skladniki"
           element={
             <ProtectedRoute>
-
-              <DataPage
-                type="dodaj-skladniki"
-              />
-
+              <DataPage type="dodaj-skladniki" />
             </ProtectedRoute>
           }
         />
@@ -93,11 +81,7 @@ function App() {
           path="/ulubione"
           element={
             <ProtectedRoute>
-
-              <DataPage
-                type="ulubione"
-              />
-
+              <DataPage type="ulubione" />
             </ProtectedRoute>
           }
         />
@@ -106,11 +90,7 @@ function App() {
           path="/ostatnio-przegladane"
           element={
             <ProtectedRoute>
-
-              <DataPage
-                type="ostatnio-przegladane"
-              />
-
+              <DataPage type="ostatnio-przegladane" />
             </ProtectedRoute>
           }
         />
@@ -119,11 +99,7 @@ function App() {
           path="/plan-posilkow"
           element={
             <ProtectedRoute>
-
-              <DataPage
-                type="plan-posilkow"
-              />
-
+              <DataPage type="plan-posilkow" />
             </ProtectedRoute>
           }
         />
@@ -132,11 +108,7 @@ function App() {
           path="/lista-zakupow"
           element={
             <ProtectedRoute>
-
-              <DataPage
-                type="lista-zakupow"
-              />
-
+              <DataPage type="lista-zakupow" />
             </ProtectedRoute>
           }
         />
@@ -145,38 +117,26 @@ function App() {
           path="/ustawienia"
           element={
             <ProtectedRoute>
-
               <SettingsPage />
-
             </ProtectedRoute>
           }
         />
 
+        {/* NOWE PODSTRONY */}
+
         <Route
           path="/kontakt"
-          element={
-            <SimplePage
-              title="Kontakt"
-            />
-          }
+          element={<ContactPage />}
         />
 
         <Route
           path="/jak-to-dziala"
-          element={
-            <SimplePage
-              title="Jak to działa?"
-            />
-          }
+          element={<HowItWorksPage />}
         />
 
         <Route
           path="/o-nas"
-          element={
-            <SimplePage
-              title="O nas"
-            />
-          }
+          element={<AboutPage />}
         />
 
         <Route

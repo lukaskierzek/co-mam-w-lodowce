@@ -5,22 +5,26 @@ import { useAuth } from '../context/useAuth.jsx'
 
 function TopNav() {
 
-  const [query, setQuery] = useState('')
+  const { user, logout } = useAuth()
 
   const navigate = useNavigate()
 
-  const { user, logout } = useAuth()
+  const [query, setQuery] =
+    useState('')
 
-  const onSearch = (e) => {
+  const handleSearch = (e) => {
 
     e.preventDefault()
 
-    const q = query.trim()
+    const value =
+      query.trim()
 
     navigate(
 
-      q
-        ? `/przepisy?q=${encodeURIComponent(q)}`
+      value
+
+        ? `/przepisy?q=${encodeURIComponent(value)}`
+
         : '/przepisy'
 
     )
@@ -32,13 +36,21 @@ function TopNav() {
     <header className="topbar">
 
       <Link
-        to="/"
-        className="brand"
-      >
+  to="/"
+  className="brand"
+>
 
-        Co mam w lodówce?
+  <span>
 
-      </Link>
+    Co mam w
+
+    <br />
+
+    lodówce?
+
+  </span>
+
+</Link>
 
       <Link
         to="/przepisy"
@@ -54,77 +66,90 @@ function TopNav() {
         className="btn primary nav-link"
       >
 
-        Dodaj składniki
-
-      </Link>
-
-      <Link
-        to={
-          user
-            ? '/kontakt'
-            : '/jak-to-dziala'
-        }
-        className="btn primary nav-link"
-      >
-
-        {
-          user
-            ? 'Kontakt'
-            : 'Jak to działa?'
-        }
+        Dodaj Składniki
 
       </Link>
 
       {
 
-        !user && (
-
-          <Link
-            to="/o-nas"
-            className="btn primary nav-link"
-          >
-
-            O nas
-
-          </Link>
-
-        )
-
-      }
-
-      <form
-        onSubmit={onSearch}
-        style={{
-          display:
-            'contents'
-        }}
-      >
-
-        <input
-
-          className="search"
-
-          placeholder="wyszukaj przepis"
-
-          value={query}
-
-          onChange={(e)=>
-
-            setQuery(
-              e.target.value
-            )
-
-          }
-
-        />
-
-      </form>
-
-      {
-
-        !user ? (
+        user ? (
 
           <>
+
+            <Link
+              to="/kontakt"
+              className="btn primary nav-link"
+            >
+
+              Kontakt
+
+            </Link>
+
+            <form
+              onSubmit={handleSearch}
+            >
+
+              <input
+
+                className="search"
+
+                placeholder="wyszukaj przepis"
+
+                value={query}
+
+                onChange={(e)=>
+
+                  setQuery(
+                    e.target.value
+                  )
+
+                }
+
+              />
+
+            </form>
+
+            <div className="top-icons">
+
+  <span>🔔</span>
+
+  <span>👤</span>
+
+  <span
+    style={{
+      cursor: 'pointer'
+    }}
+    onClick={logout}
+  >
+
+    ⌄
+
+  </span>
+
+</div>
+          </>
+
+        ) : (
+
+          <>
+
+            <Link
+              to="/jak-to-dziala"
+              className="btn primary nav-link"
+            >
+
+              Jak to działa?
+
+            </Link>
+
+            <Link
+              to="/o-nas"
+              className="btn primary nav-link"
+            >
+
+              O nas
+
+            </Link>
 
             <Link
               to="/login"
@@ -143,48 +168,6 @@ function TopNav() {
               Załóż konto
 
             </Link>
-
-          </>
-
-        ) : (
-
-          <>
-
-            <button
-
-              className="btn nav-link"
-
-              onClick={logout}
-
-            >
-
-              Wyloguj
-
-            </button>
-
-            <div
-              className="top-icons"
-            >
-
-              <span>
-
-                🔔
-
-              </span>
-
-              <span>
-
-                👤
-
-              </span>
-
-              <span>
-
-                ⌄
-
-              </span>
-
-            </div>
 
           </>
 

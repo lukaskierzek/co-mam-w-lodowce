@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/useAuth.jsx'
+import separator from '../assets/ui/line-separator.png'
 
 const mainItems = [
   { label: 'Strona główna', to: '/welcome' },
@@ -18,25 +19,69 @@ const accountItems = [
 function SideMenu() {
   const navigate = useNavigate()
   const location = useLocation()
+
   const { logout } = useAuth()
 
   const handleLogout = async () => {
     await logout()
     navigate('/login')
   }
+
   return (
     <aside className="side-menu">
+
       {mainItems.map((item) => (
-        <Link className={`menu-item nav-link ${location.pathname === item.to ? 'active' : ''}`} to={item.to} key={item.label}>
+        <Link
+          key={item.label}
+          to={item.to}
+          className={`menu-item nav-link ${
+            location.pathname === item.to
+              ? 'active'
+              : ''
+          }`}
+        >
           {item.label}
         </Link>
       ))}
-      <div style={{ height: 18 }} />
+
+      <div className="side-separator">
+        <img
+          src={separator}
+          alt="separator menu"
+        />
+      </div>
+
       {accountItems.map((item) => (
+
         item.label === 'Wyloguj'
-          ? <button type="button" className="menu-item nav-link" key={item.label} onClick={handleLogout}>{item.label}</button>
-          : <Link className="menu-item nav-link" to={item.to} key={item.label}>{item.label}</Link>
+
+          ? (
+            <button
+              key={item.label}
+              type="button"
+              className="menu-item nav-link"
+              onClick={handleLogout}
+            >
+              {item.label}
+            </button>
+          )
+
+          : (
+            <Link
+              key={item.label}
+              to={item.to}
+              className={`menu-item nav-link ${
+                location.pathname === item.to
+                  ? 'active'
+                  : ''
+              }`}
+            >
+              {item.label}
+            </Link>
+          )
+
       ))}
+
     </aside>
   )
 }
