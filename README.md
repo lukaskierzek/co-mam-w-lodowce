@@ -203,8 +203,8 @@ Dodatkowo build zgłasza ostrzezenie o duzym bundlu JS i kilku ciezkich assetach
 ## Autorzy
 
 - Łukasz Kierzek
-- Tomasz Gondea
-- Adam BAhonko
+- Tomasz Gondek
+- Adam Bahonko
 
 Politechnika Krakowska  
 Techniki Projektowania Frontendowego  
