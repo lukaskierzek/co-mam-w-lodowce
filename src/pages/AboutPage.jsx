@@ -23,6 +23,13 @@ function AboutPage() {
             składników użytkownika.
           </p>
 
+          <p>Twórcy:</p>
+          <ul>
+            <li>Tomasz Gondek</li>
+            <li>Łukasz Kierzek</li>
+            <li>Adam Bahonko</li>
+          </ul>
+
           <h2>Funkcje aplikacji</h2>
 
           <ul>

@@ -1,383 +1,211 @@
-# 🧊 Co mam w lodówce?
+# Co mam w lodowce?
 
-Projekt wykonany w ramach przedmiotu:
+Aplikacja webowa do zarzadzania zawartoscia wirtualnej lodowki i wyszukiwania przepisow na podstawie dostepnych skladnikow. Projekt zostal przygotowany w React + Vite w ramach przedmiotu `Techniki Projektowania Frontendowego`.
 
-**Techniki Projektowania Frontendowego**  
-Politechnika Krakowska – Wydział Informatyki i Matematyki
+## Zakres projektu
 
-Autorzy:
-- Łukasz Kierzek
-- Tomasz Gondek
+Na podstawie analizy kodu projekt zawiera:
 
----
+- strone glowna z wyszukiwarka przepisow,
+- rejestracje i logowanie,
+- chronione widoki po zalogowaniu,
+- wirtualna lodowke i dodawanie skladnikow,
+- liste przepisow, widoki kategorii i szczegoly przepisu,
+- ulubione przepisy,
+- ostatnio przegladane przepisy,
+- plan posilkow,
+- liste zakupow,
+- ustawienia konta,
+- dwa tryby danych i autoryzacji: `localStorage` oraz `Firebase`,
+- integracje analityczne: Firebase Analytics i Hotjar.
 
-## 📌 Opis projektu
+## Stos technologiczny
 
-„Co mam w lodówce?” to aplikacja webowa wspierająca planowanie posiłków oraz ograniczanie marnowania żywności.
-
-Użytkownik dodaje produkty znajdujące się w swojej wirtualnej lodówce, a system proponuje przepisy dopasowane do aktualnie dostępnych składników.
-
-Projekt zawiera:
-
-✅ wirtualną lodówkę  
-✅ wyszukiwanie przepisów  
-✅ ulubione przepisy  
-✅ ostatnio przeglądane  
-✅ planowanie posiłków  
-✅ listę zakupów  
-✅ logowanie Firebase Authentication  
-✅ Google Analytics  
-✅ Hotjar / Contentsquare  
-✅ deployment aplikacji  
-✅ responsywny interfejs React + Vite
-
----
-
-# 🖼 Widoki aplikacji
-
-## Strona główna
-
-![Home](docs/screens/home.png)
-
----
-
-## Lista przepisów
-
-![Recipes](docs/screens/recipes.png)
-
----
-
-## Szczegóły przepisu
-
-![Recipe details](docs/screens/recipe-details.png)
-
----
-
-## Dodawanie składników
-
-![Ingredients](docs/screens/ingredients.png)
-
----
-
-## Lista zakupów
-
-![Shopping list](docs/screens/shopping.png)
-
----
-
-## Plan posiłków
-
-![Meal plan](docs/screens/meal-plan.png)
-
----
-
-# 🧠 Założenia projektowe
-
-Projekt został przygotowany na podstawie:
-
-- analizy użytkowników
-- domeny terminologii
-- schematu funkcjonalnego
-- architektury informacji
-- makiet UI
-- specyfikacji kolorystycznej
-- technicznej specyfikacji interfejsu
-
-Najważniejsze funkcje:
-
-### Wirtualna lodówka
-
-Pozwala przechowywać produkty:
-
-- warzywa
-- nabiał
-- mięso
-- produkty suche
-- inne składniki
-
----
-
-### Dopasowanie przepisów
-
-System analizuje:
-
-- produkty użytkownika
-- kategorię przepisu
-- poziom trudności
-- czas wykonania
-
-Na tej podstawie prezentowane są propozycje potraw.
-
----
-
-### Zarządzanie posiłkami
-
-Obsługiwane moduły:
-
-- plan posiłków
-- lista zakupów
-- ulubione przepisy
-- historia przeglądania
-- zarządzanie składnikami
-
----
-
-# 🛠 Technologie
-
-Frontend:
-
-- React
-- Vite
-- React Router DOM
-- Context API
-
-Stylowanie:
-
-- CSS3
-- komponenty wielokrotnego użycia
-
-Integracje:
-
+- React 19
+- Vite 8
+- React Router DOM 7
 - Firebase Authentication
-- Google Analytics
-- Hotjar / Contentsquare
+- Firestore
+- Firebase Analytics
+- Hotjar
+- ESLint
 
-Deployment:
+## Jak dziala aplikacja
 
-- Vercel
+Projekt ma dwa tryby pracy:
 
----
+1. `DEV` - dane i sesja sa zapisywane lokalnie w `localStorage`.
+2. `DEVPROD` / produkcja - logowanie i profile uzytkownikow dzialaja przez Firebase, a analityka przez Firebase Analytics i Hotjar.
 
-# 🔥 Firebase Authentication
+Warstwa autoryzacji jest rozwiazana przez fasade:
 
-Projekt wykorzystuje logowanie użytkownika przez Firebase.
+- [`src/services/auth/authService.js`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/services/auth/authService.js)
+- [`src/services/userService.js`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/services/userService.js)
 
-Obsługiwane funkcje:
+W zaleznosci od `VITE_USE_FIREBASE` aplikacja przelacza sie miedzy implementacja lokalna i Firebase.
 
-✅ rejestracja
+## Najwazniejsze widoki
 
-✅ logowanie
+### Publiczne
 
-✅ wylogowanie
+- `/` - strona glowna
+- `/login` - logowanie
+- `/register` - rejestracja
+- `/kontakt` - kontakt
+- `/jak-to-dziala` - opis dzialania
+- `/o-nas` - informacje o zespole
+- `/przepis/:id` - szczegoly przepisu
+- `/kategoria/:slug` - lista przepisow w kategorii
 
-✅ zabezpieczone trasy
+### Chronione
 
-✅ widoki zależne od stanu użytkownika
+- `/welcome`
+- `/przepisy`
+- `/dodaj-skladniki`
+- `/moje-skladniki`
+- `/ulubione`
+- `/ostatnio-przegladane`
+- `/plan-posilkow`
+- `/lista-zakupow`
+- `/ustawienia`
 
-Po zalogowaniu użytkownik otrzymuje dostęp do:
+## Struktura projektu
 
-- Moje składniki
-- Ulubione
-- Plan posiłków
-- Lista zakupów
-- Ustawienia
-
----
-
-# 📈 Google Analytics
-
-Aplikacja posiada integrację z Google Analytics.
-
-Monitorowane są:
-
-- wejścia użytkowników
-- odsłony podstron
-- routing SPA
-- aktywność użytkowników
-
-### Screeny Google Analytics
-
-Dodaj później:
-
-```txt
-docs/analytics/google-1.png
-docs/analytics/google-2.png
-```
-
-![GA1](docs/analytics/google-1.png)
-
-![GA2](docs/analytics/google-2.png)
-
----
-
-# 🎥 Hotjar / Contentsquare
-
-Projekt został zintegrowany z Hotjar / Contentsquare.
-
-Wykorzystywane funkcje:
-
-- Session Replay
-- analiza ruchu
-- heatmapy
-- analiza zachowania użytkownika
-
-# Vercel
-Projekt został zintegrowany z Vercel.
-![vertel](docs/screens/vertel.png)
-
-### Screeny Hotjar
-
-Dodaj później:
-
-```txt
-docs/hotjar/session-replay.png
-docs/hotjar/page-comparator.png
-docs/hotjar/dashboard.png
-```
-
-![Replay](docs/hotjar/session-replay.png)
-
-![Comparator](docs/hotjar/page-comparator.png)
-
-![Dashboard](docs/hotjar/dashboard.png)
-
----
-
-# 🚀 Deployment
-
-Aplikacja została wdrożona na Vercel.
-
-Adres produkcyjny:
-
-```txt
-https://co-mam-w-lodowce.vercel.app
-```
-
-Repozytorium:
-
-```txt
-https://github.com/lukaskierzek/co-mam-w-lodowce
-```
-
----
-
-# ⚙ Tryby uruchamiania
-
-| Tryb | Komenda | Opis |
-|------|------|------|
-| DEV | npm run dev | localStorage |
-| DEVPROD | npx vite --mode devprod | Firebase |
-| BUILD | npm run build | produkcja |
-
----
-
-# 📁 Struktura projektu
-
-```txt
+```text
 src/
-│
-├── assets/
-│
-├── components/
-│   ├── RecipeCard
-│   ├── SideMenu
-│   ├── TopNav
-│
-├── pages/
-│   ├── HomePage
-│   ├── LoginPage
-│   ├── RegisterPage
-│   ├── RecipeDetailsPage
-│   ├── SettingsPage
-│
-├── services/
-│
-├── context/
-│
-├── routes/
-│
-└── styles/
+├── assets/                 # obrazy, ikony, grafiki dań
+├── components/             # komponenty UI i trasy chronione
+├── context/                # kontekst autoryzacji
+├── layouts/                # uklady stron po zalogowaniu
+├── pages/                  # widoki aplikacji
+├── services/               # dane, Firebase, auth, profile userow
+├── App.jsx                 # routing
+├── index.css               # style globalne
+└── main.jsx                # bootstrap aplikacji
+
+docs/
+└── screens/                # zrzuty ekranu do dokumentacji
 ```
 
----
+## Uruchomienie lokalne
 
-# ▶ Instalacja
-
-Pobranie projektu:
-
-```bash
-git clone https://github.com/lukaskierzek/co-mam-w-lodowce.git
-```
-
-Instalacja zależności:
+Instalacja:
 
 ```bash
 npm install
 ```
 
-Uruchomienie:
+Tryb developerski z `localStorage`:
 
 ```bash
 npm run dev
 ```
 
-Tryb Firebase:
+Tryb developerski z Firebase:
 
 ```bash
 npx vite --mode devprod
 ```
 
-Build:
+Build produkcyjny:
 
 ```bash
 npm run build
 ```
 
----
+Lint:
 
-# 📚 Dokumentacja projektu
+```bash
+npm run lint
+```
 
-Projekt zawiera:
+## Zmienne srodowiskowe
 
-- analizę potrzeb użytkowników
-- domenę terminologii
-- architekturę informacji
-- makiety
-- projekt UI
-- integracje Firebase
-- Google Analytics
-- Hotjar
-- deployment
+Podstawowy plik `.env` przewiduje:
 
----
+```env
+VITE_USE_FIREBASE=false
+VITE_GA_DEBUG_MODE=false
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+VITE_FIREBASE_MEASUREMENT_ID=
+```
 
-# 📷 Materiały do uzupełnienia przed oddaniem
+Repo zawiera tez `env.devprod`, ktory uruchamia aplikacje z Firebase i Hotjar w trybie lokalnym.
 
-## Screeny aplikacji
+## Materialy do README / oddania
 
-- [ ] Home
-- [ ] Lista przepisów
-- [ ] Szczegóły przepisu
-- [ ] Dodawanie składników
-- [ ] Plan posiłków
-- [ ] Lista zakupów
+W repo sa dostepne nastepujace screeny:
 
-## Google Analytics
+### Widoki aplikacji
 
-- [ ] Dashboard
-- [ ] Page Views
-- [ ] Events
+## Strona główna
+![Strona glowna](docs/screens/strona_glowna.png)
+## Wyszukiwarka przepisów
+![Wyszukiwarka](docs/screens/wyszukiwarka.png)
+## Szczegóły przepisu
+![Szczegoly przepisu](docs/screens/strona_z_przepisem.png)
+
+## Logowanie
+![Logowanie](docs/screens/logowanie.png)
+
+## Rejestracja
+![Rejestracja](docs/screens/rejestracja.png)
+
+## Strona witająca użytkownika
+![Welcome page](docs/screens/welcome_page.png)
+
+## Podstrona jak to działa 
+![Jak to dziala](docs/screens/jak_to_dziala.png)
+
+## Podstrona o nas
+![O nas](docs/screens/o_nas.png)
+
+### Integracje
+
+## Firebase
+![Firebase](docs/screens/firebase.png)
 
 ## Hotjar
+![Hotjar](docs/screens/hotjar.png)
 
-- [ ] Session Replay
-- [ ] Heatmaps
-- [ ] Page Comparator
+## Deployment na vertel
+![Deployment](docs/screens/deploy_strona_vertel.png)
+https://co-mam-w-lodowce.vercel.app/
 
-## Deployment
+## Wynik analizy projektu
 
-- [ ] Screen z Vercel
-- [ ] Link produkcyjny
+Po przegladzie repo:
 
----
+- routing jest zebrany w [`src/App.jsx`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/App.jsx),
+- dane przepisow i logika `localStorage` sa w [`src/services/dataService.js`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/services/dataService.js),
+- kontekst sesji jest w [`src/context/AuthContext.jsx`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/context/AuthContext.jsx),
+- Firebase i analityka sa inicjalizowane w [`src/services/firebase.js`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/services/firebase.js) oraz [`src/components/AnalyticsListener.jsx`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/components/AnalyticsListener.jsx),
+- warstwa UI jest gotowa do prezentacji projektu i zawiera material screenshotowy w `docs/screens`.
 
-# 👨‍💻 Autorzy
+## Stan techniczny
 
-- Łukasz Kierzek  
-- Tomasz Gondek
-- Adam Bohonko
+Sprawdzone lokalnie:
+
+- `npm run build` - przechodzi poprawnie,
+- `npm run lint` - obecnie nie przechodzi.
+
+Aktualny blad lintera:
+
+- [`src/layouts/AuthedLayout.jsx:6`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/layouts/AuthedLayout.jsx:6) - nieuzywany import `corner`.
+
+Dodatkowo build zgłasza ostrzezenie o duzym bundlu JS i kilku ciezkich assetach graficznych.
+
+## Autorzy
+
+- Łukasz Kierzek
+- Tomasz Gondea
+- Adam BAhonko
 
 Politechnika Krakowska  
-Techniki Projektowania Frontendowego
-
+Techniki Projektowania Frontendowego  
 2026
