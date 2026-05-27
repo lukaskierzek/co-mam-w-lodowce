@@ -835,3 +835,34 @@ width:18px;
 height:18px;
 
 }
+
+
+.category-icon{
+
+width:64px;
+
+height:64px;
+
+object-fit:contain;
+
+display:block;
+
+margin:0 auto;
+
+}
+
+.category-card .card-body{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:14px;
+
+height:100%;
+
+}

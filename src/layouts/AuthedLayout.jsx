@@ -3,6 +3,8 @@ import SideMenu from '../components/SideMenu.jsx'
 
 import { useAuth } from '../context/useAuth.jsx'
 
+import corner from '../assets/ui/corner_leaf.png'
+
 function AuthedLayout({
   children
 }) {
@@ -40,6 +42,8 @@ function AuthedLayout({
         </main>
 
       </div>
+
+
 
     </div>
 
