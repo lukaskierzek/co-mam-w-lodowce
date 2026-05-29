@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import TopNav from '../components/TopNav.jsx'
@@ -52,17 +53,11 @@ function RecipeDetailsPage() {
 
   }
 
-  addRecentlyViewed(
-    recipe.id
-  )
-
   const handleFavorite = () => {
 
-    toggleFavorite(
-      recipe.id
-    )
+    const updated = toggleFavorite(recipe.id)
 
-    window.location.reload()
+    setRecipe(updated)
 
   }
 

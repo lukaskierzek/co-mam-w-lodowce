@@ -69,7 +69,6 @@ function getData() {
   const stored =
     JSON.parse(raw)
 
-  // Synchronizacja przepisów
   const mergedRecipes =
 
     seedData.recipes.map(
@@ -84,10 +83,9 @@ function getData() {
 
           ? {
 
-              ...existing,
+              ...recipe,
 
-              // nowe dane z seedData
-              ...recipe
+              favorite: existing.favorite ?? false,
 
             }
 
