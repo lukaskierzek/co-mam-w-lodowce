@@ -137,77 +137,51 @@ VITE_FIREBASE_MEASUREMENT_ID=
 
 Repo zawiera tez `env.devprod`, ktory uruchamia aplikacje z Firebase i Hotjar w trybie lokalnym.
 
-## Materialy do README / oddania
+## Widoki aplikacji
 
-W repo sa dostepne nastepujace screeny:
-
-### Widoki aplikacji
-
-## Strona główna
+### Strona główna
 ![Strona glowna](docs/screens/strona_glowna.png)
-## Wyszukiwarka przepisów
+### Wyszukiwarka przepisów
 ![Wyszukiwarka](docs/screens/wyszukiwarka.png)
-## Szczegóły przepisu
+### Szczegóły przepisu
 ![Szczegoly przepisu](docs/screens/strona_z_przepisem.png)
 
 ## Ulubione przepisy
 ![Ulubione przepisy](docs/screens/ulubione.png)
 
-## Logowanie
+### Logowanie
 ![Logowanie](docs/screens/logowanie.png)
 
-## Rejestracja
+### Rejestracja
 ![Rejestracja](docs/screens/rejestracja.png)
 
-## Strona witająca użytkownika
+### Strona witająca użytkownika
 ![Welcome page](docs/screens/welcome_page.png)
 
-## Podstrona jak to działa 
+### Podstrona jak to działa 
 ![Jak to dziala](docs/screens/jak_to_dziala.png)
 
-## Podstrona o nas
+### Podstrona o nas
 ![O nas](docs/screens/o_nas.png)
 
-### Integracje
+## Integracje
 
-## Firebase
+### Firebase
 ![Firebase](docs/screens/firebase.png)
 ![Firebase](docs/screens/firebase-autentication.png)
 
-## Google Analytics
+### Google Analytics
 ![Google Analytics](docs/screens/google-analitics-overview.png)
 ![Google Analytics](docs/screens/google-analitics-overview-2.png)
 ![Google Analytics](docs/screens/google-analitics-debug.png)
 
-## Hotjar
+### Hotjar
 ![Hotjar](docs/screens/hotjar.png)
 
-## Deployment na vertel
+### Deployment na vertel
 ![Deployment](docs/screens/deploy_strona_vertel.png)
 https://co-mam-w-lodowce.vercel.app/
 
-## Wynik analizy projektu
-
-Po przegladzie repo:
-
-- routing jest zebrany w [`src/App.jsx`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/App.jsx),
-- dane przepisow i logika `localStorage` sa w [`src/services/dataService.js`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/services/dataService.js),
-- kontekst sesji jest w [`src/context/AuthContext.jsx`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/context/AuthContext.jsx),
-- Firebase i analityka sa inicjalizowane w [`src/services/firebase.js`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/services/firebase.js) oraz [`src/components/AnalyticsListener.jsx`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/components/AnalyticsListener.jsx),
-- warstwa UI jest gotowa do prezentacji projektu i zawiera material screenshotowy w `docs/screens`.
-
-## Stan techniczny
-
-Sprawdzone lokalnie:
-
-- `npm run build` - przechodzi poprawnie,
-- `npm run lint` - obecnie nie przechodzi.
-
-Aktualny blad lintera:
-
-- [`src/layouts/AuthedLayout.jsx:6`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/layouts/AuthedLayout.jsx:6) - nieuzywany import `corner`.
-
-Dodatkowo build zgłasza ostrzezenie o duzym bundlu JS i kilku ciezkich assetach graficznych.
 
 ## Autorzy
 
