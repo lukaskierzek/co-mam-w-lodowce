@@ -150,6 +150,9 @@ W repo sa dostepne nastepujace screeny:
 ## Szczegóły przepisu
 ![Szczegoly przepisu](docs/screens/strona_z_przepisem.png)
 
+## Ulubione przepisy
+![Ulubione przepisy](docs/screens/ulubione.png)
+
 ## Logowanie
 ![Logowanie](docs/screens/logowanie.png)
 
