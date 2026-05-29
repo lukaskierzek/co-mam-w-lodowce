@@ -169,6 +169,12 @@ W repo sa dostepne nastepujace screeny:
 
 ## Firebase
 ![Firebase](docs/screens/firebase.png)
+![Firebase](docs/screens/firebase-autentication.png)
+
+## Google Analytics
+![Google Analytics](docs/screens/google-analitics-overview.png)
+![Google Analytics](docs/screens/google-analitics-overview-2.png)
+![Google Analytics](docs/screens/google-analitics-debug.png)
 
 ## Hotjar
 ![Hotjar](docs/screens/hotjar.png)
