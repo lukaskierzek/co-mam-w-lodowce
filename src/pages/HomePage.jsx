@@ -47,44 +47,22 @@ function HomePage() {
 
       <TopNav />
 
-      <main
-        style={{
-          padding:
-            '0 24px 30px'
-        }}
-      >
+      <main className="home-main">
 
         <section
-          className="hero"
-          style={{
-            marginTop: 16
-          }}
+          className="hero home-hero"
         >
 
           <div>
 
-            <h1
-              style={{
-                color:
-                  'var(--primary-dark)',
-
-                fontSize: 46,
-
-                marginBottom: 8
-              }}
-            >
+            <h1 className="home-title">
 
               Smaczne przepisy z tego,
               co masz w lodówce
 
             </h1>
 
-            <p
-              style={{
-                color:
-                  'var(--text-muted)'
-              }}
-            >
+            <p className="home-copy">
 
               Nie wiesz co ugotować?
 
@@ -122,19 +100,7 @@ function HomePage() {
 
             </form>
 
-            <div
-              style={{
-                display: 'flex',
-
-                gap: 18,
-
-                marginTop: 28,
-
-                flexWrap: 'wrap',
-
-                alignItems: 'center'
-              }}
-            >
+            <div className="quick-searches">
 
               <span>
 
@@ -197,12 +163,7 @@ function HomePage() {
 
         </section>
 
-        <section
-          style={{
-            marginTop: 26,
-            padding: 0
-          }}
-        >
+        <section className="how-section">
 
           <img
 
@@ -210,28 +171,11 @@ function HomePage() {
 
             alt="Jak działa"
 
-            style={{
-              width: '100%',
-
-              maxWidth:
-                '1200px',
-
-              display:
-                'block',
-
-              margin:
-                '0 auto'
-            }}
-
           />
 
         </section>
 
-        <section
-          style={{
-            marginTop: 26
-          }}
-        >
+        <section className="featured-section">
 
           <h2
             className="section-title"

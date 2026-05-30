@@ -18,8 +18,8 @@ function WelcomePage() {
     <AuthedLayout>
           <section className="hero">
             <div>
-              <h1 style={{ fontSize: 50, margin: 0 }}>Cześć, User1!</h1>
-              <p style={{ color: 'var(--text-muted)', marginTop: 12 }}>
+              <h1 className="welcome-title">Cześć, User1!</h1>
+              <p className="welcome-copy">
                 zobacz co możesz ugotować z tego co masz w lodówce
               </p>
             </div>
@@ -27,7 +27,7 @@ function WelcomePage() {
               <img src={heroImg} alt="Lodówka ze składnikami" className="hero-image" />
             </div>
           </section>
-          <h2 style={{ color: 'var(--primary-dark)', marginTop: 26 }}>Kategorie:</h2>
+          <h2 className="section-heading">Kategorie:</h2>
           <div className="category-grid">
 
   {[
@@ -53,12 +53,7 @@ function WelcomePage() {
     >
 
       <div
-        className="card-body"
-        style={{
-          textAlign: 'center',
-          color: 'var(--primary-dark)',
-          fontWeight: 600
-        }}
+        className="card-body category-card-content"
       >
 
         <img
@@ -77,7 +72,7 @@ function WelcomePage() {
 
 </div>
           <h2 className="section-title">Propozycje na dzisiaj:</h2>
-          <div className="cards" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
+          <div className="cards suggestion-cards">
             {recipeSuggestions.map((recipe) => (
               <Link to={`/przepis/${recipe.id}`} className="nav-link" key={recipe.id}>
                 <RecipeCard
