@@ -8,6 +8,8 @@
  */
 import * as local from './localAuthService.js'
 import * as fb from './firebaseAuthService.js'
+import { signInWithPopup } from 'firebase/auth'
+import { auth, googleProvider } from '../firebase.js'
 
 const useFirebase =
   import.meta.env.VITE_USE_FIREBASE === 'true' &&
@@ -27,3 +29,18 @@ export const updateSessionUser = (args) => svc.updateSessionUser(args)
 export const getAllUsers        = ()     => svc.getAllUsers()
 export const updateUserById    = (id, patch) => svc.updateUserById(id, patch)
 export const subscribeToAuth   = (cb)   => svc.subscribeToAuth(cb)
+export async function loginWithGoogle() {
+  console.log('auth:', auth)
+  console.log('googleProvider:', googleProvider)
+
+  if (!auth || !googleProvider) {
+    throw new Error('Firebase Authentication nie jest skonfigurowane')
+  }
+
+  const result = await signInWithPopup(
+    auth,
+    googleProvider
+  )
+
+  return result.user
+}

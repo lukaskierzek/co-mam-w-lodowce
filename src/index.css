@@ -409,6 +409,19 @@ gap:20px;
   gap: 12px;
 }
 
+.auth-card {
+  background: #f8fcfd;
+
+  border: 1px solid #d9e7ec;
+
+  border-radius: 24px;
+
+  padding: 2rem;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
 .auth-input {
   height: 44px;
   border: 1px solid #b7d5da;
@@ -865,4 +878,139 @@ gap:14px;
 
 height:100%;
 
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  color: #888;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+.auth-divider span {
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  background: white;
+  color: #333;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  padding: 12px;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.google-btn:hover {
+  background: #f7f7f7;
+  border-color: #bbb;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.auth-footer a {
+  font-weight: 600;
+}
+
+/* Logo nad formularzem */
+.auth-logo {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Podtytuł */
+.auth-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Nagłówek formularza */
+.auth-card h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Separator "lub" */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  color: #6b7280;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #dbe3e8;
+}
+
+.auth-divider span {
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+
+/* Przycisk Google */
+.google-btn {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  background: #fff;
+  color: #1f2937;
+
+  border: 1px solid #dbe3e8;
+  border-radius: 12px;
+
+  padding: 12px 16px;
+
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.google-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Stopka formularza */
+.auth-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.auth-footer a {
+  font-weight: 600;
+  text-decoration: none;
 }
