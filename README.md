@@ -150,10 +150,10 @@ Repo zawiera tez `env.devprod`, ktory uruchamia aplikacje z Firebase i Hotjar w 
 ![Ulubione przepisy](docs/screens/ulubione.png)
 
 ### Logowanie
-![Logowanie](docs/screens/logowanie.png)
+![Logowanie](docs/screens/logowanie_2.png)
 
 ### Rejestracja
-![Rejestracja](docs/screens/rejestracja.png)
+![Rejestracja](docs/screens/rejestracja_2.png)
 
 ### Strona witająca użytkownika
 ![Welcome page](docs/screens/welcome_page.png)
