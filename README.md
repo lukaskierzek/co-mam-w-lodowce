@@ -1,187 +1,278 @@
-# Co mam w lodowce?
+# 🧊 Co Mam w Lodówce?
 
-Aplikacja webowa do zarzadzania zawartoscia wirtualnej lodowki i wyszukiwania przepisow na podstawie dostepnych skladnikow. Projekt zostal przygotowany w React + Vite w ramach przedmiotu `Techniki Projektowania Frontendowego`.
+Aplikacja webowa wspomagająca zarządzanie zawartością lodówki oraz wyszukiwanie przepisów kulinarnych na podstawie dostępnych składników.
 
-## Zakres projektu
+Projekt został wykonany w ramach przedmiotu **Techniki Projektowania Frontendowego**.
 
-Na podstawie analizy kodu projekt zawiera:
+---
 
-- strone glowna z wyszukiwarka przepisow,
-- rejestracje i logowanie,
-- chronione widoki po zalogowaniu,
-- wirtualna lodowke i dodawanie skladnikow,
-- liste przepisow, widoki kategorii i szczegoly przepisu,
-- ulubione przepisy,
-- ostatnio przegladane przepisy,
-- plan posilkow,
-- liste zakupow,
-- ustawienia konta,
-- dwa tryby danych i autoryzacji: `localStorage` oraz `Firebase`,
-- integracje analityczne: Firebase Analytics i Hotjar.
+## 🌐 Wersja produkcyjna
 
-## Stos technologiczny
+https://co-mam-w-lodowce.vercel.app/
 
-- React 19
-- Vite 8
-- React Router DOM 7
-- Firebase Authentication
-- Firestore
+---
+
+## Funkcjonalności
+
+### Użytkownicy
+
+- Rejestracja użytkownika
+- Logowanie Email / Password
+- Logowanie przez Google Provider
+- Wylogowanie
+- Edycja danych użytkownika
+
+### Przepisy
+
+- Lista przepisów
+- Szczegóły przepisu
+- Wyszukiwanie przepisów
+- Kategorie przepisów
+- Ulubione przepisy
+- Ostatnio przeglądane przepisy
+
+### Zarządzanie lodówką
+
+- Dodawanie składników
+- Usuwanie składników
+- Lista zakupów
+- Plan posiłków
+
+### Analityka
+
 - Firebase Analytics
-- Hotjar
-- ESLint
+- Hotjar / Contentsquare
+- Śledzenie odwiedzanych podstron
+- Monitoring aktywności użytkownika
 
-## Jak dziala aplikacja
+---
 
-Projekt ma dwa tryby pracy:
+##  Architektura aplikacji
 
-1. `DEV` - dane i sesja sa zapisywane lokalnie w `localStorage`.
-2. `DEVPROD` / produkcja - logowanie i profile uzytkownikow dzialaja przez Firebase, a analityka przez Firebase Analytics i Hotjar.
+Projekt został zbudowany w oparciu o React oraz React Router.
 
-Warstwa autoryzacji jest rozwiazana przez fasade:
+Autoryzacja została zaimplementowana przy użyciu wzorca fasady:
 
-- [`src/services/auth/authService.js`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/services/auth/authService.js)
-- [`src/services/userService.js`](/C:/Users/Kierzu/Documents/Cyberbezpieczeństwo%20sem%20II/Techniki%20projektowania%20frontendowego/Projekt2/lodowka/src/services/userService.js)
+```text
+AuthService
+│
+├── localAuthService
+│
+└── firebaseAuthService
+```
 
-W zaleznosci od `VITE_USE_FIREBASE` aplikacja przelacza sie miedzy implementacja lokalna i Firebase.
+Dzięki temu aplikacja może działać zarówno w trybie lokalnym jak i przy wykorzystaniu Firebase.
 
-## Najwazniejsze widoki
+---
 
-### Publiczne
+## 🔐 Firebase
 
-- `/` - strona glowna
-- `/login` - logowanie
-- `/register` - rejestracja
-- `/kontakt` - kontakt
-- `/jak-to-dziala` - opis dzialania
-- `/o-nas` - informacje o zespole
-- `/przepis/:id` - szczegoly przepisu
-- `/kategoria/:slug` - lista przepisow w kategorii
+Projekt wykorzystuje następujące usługi Firebase:
 
-### Chronione
+- Firebase Authentication
+- Google Authentication Provider
+- Cloud Firestore
+- Firebase Analytics
 
-- `/welcome`
-- `/przepisy`
-- `/dodaj-skladniki`
-- `/moje-skladniki`
-- `/ulubione`
-- `/ostatnio-przegladane`
-- `/plan-posilkow`
-- `/lista-zakupow`
-- `/ustawienia`
+Dostępne są dwa tryby działania:
+
+### DEV
+
+Dane użytkowników oraz sesja przechowywane są w localStorage.
+
+### DEVPROD / PROD
+
+Autoryzacja realizowana jest przez Firebase Authentication oraz Cloud Firestore.
+
+---
+
+## Logowanie Google
+
+Aplikacja umożliwia logowanie za pomocą konta Google.
+
+Wykorzystane technologie:
+
+- Firebase Authentication
+- GoogleAuthProvider
+- signInWithPopup()
+
+Przy pierwszym logowaniu konto użytkownika tworzone jest automatycznie.
+
+---
 
 ## Struktura projektu
 
 ```text
 src/
-├── assets/                 # obrazy, ikony, grafiki dań
-├── components/             # komponenty UI i trasy chronione
-├── context/                # kontekst autoryzacji
-├── layouts/                # uklady stron po zalogowaniu
-├── pages/                  # widoki aplikacji
-├── services/               # dane, Firebase, auth, profile userow
-├── App.jsx                 # routing
-├── index.css               # style globalne
-└── main.jsx                # bootstrap aplikacji
-
-docs/
-└── screens/                # zrzuty ekranu do dokumentacji
+├── components/
+│   ├── AnalyticsListener.jsx
+│   ├── ProtectedRoute.jsx
+│   ├── PublicOnlyRoute.jsx
+│   ├── RecipeCard.jsx
+│   ├── SideMenu.jsx
+│   └── TopNav.jsx
+│
+├── context/
+│   ├── AuthContext.jsx
+│   ├── authContextValue.js
+│   └── useAuth.jsx
+│
+├── layouts/
+│   └── AuthedLayout.jsx
+│
+├── pages/
+│   ├── HomePage.jsx
+│   ├── LoginPage.jsx
+│   ├── RegisterPage.jsx
+│   ├── WelcomePage.jsx
+│   ├── DataPage.jsx
+│   ├── RecipeDetailsPage.jsx
+│   ├── CategoryPage.jsx
+│   ├── AboutPage.jsx
+│   ├── ContactPage.jsx
+│   ├── HowItWorksPage.jsx
+│   └── SettingsPage.jsx
+│
+├── services/
+│   ├── auth/
+│   ├── firebase.js
+│   ├── dataService.js
+│   ├── firestoreUserService.js
+│   └── userService.js
+│
+├── App.jsx
+├── main.jsx
+└── index.css
 ```
 
-## Uruchomienie lokalne
+---
 
-Instalacja:
+## Technologie
+
+| Technologia | Zastosowanie |
+|-------------|-------------|
+| React 19 | Interfejs użytkownika |
+| Vite 8 | Build oraz development |
+| React Router DOM 7 | Routing |
+| Firebase Authentication | Uwierzytelnianie |
+| Google Provider | Logowanie OAuth |
+| Cloud Firestore | Przechowywanie danych |
+| Firebase Analytics | Analityka |
+| Hotjar / Contentsquare | Heatmapy i nagrania sesji |
+| ESLint | Kontrola jakości kodu |
+| Vercel | Hosting aplikacji |
+
+---
+
+## Uruchomienie projektu
+
+### Instalacja
 
 ```bash
 npm install
 ```
 
-Tryb developerski z `localStorage`:
+### Tryb developerski
 
 ```bash
 npm run dev
 ```
 
-Tryb developerski z Firebase:
+### Tryb Firebase
 
 ```bash
 npx vite --mode devprod
 ```
 
-Build produkcyjny:
+### Build produkcyjny
 
 ```bash
 npm run build
 ```
 
-Lint:
+### Podgląd buildu
 
 ```bash
-npm run lint
+npm run preview
 ```
 
-## Zmienne srodowiskowe
+---
 
-Podstawowy plik `.env` przewiduje:
-
-```env
-VITE_USE_FIREBASE=false
-VITE_GA_DEBUG_MODE=false
-VITE_FIREBASE_API_KEY=
-VITE_FIREBASE_AUTH_DOMAIN=
-VITE_FIREBASE_PROJECT_ID=
-VITE_FIREBASE_STORAGE_BUCKET=
-VITE_FIREBASE_MESSAGING_SENDER_ID=
-VITE_FIREBASE_APP_ID=
-VITE_FIREBASE_MEASUREMENT_ID=
-```
-
-Repo zawiera tez `env.devprod`, ktory uruchamia aplikacje z Firebase i Hotjar w trybie lokalnym.
-
-## Widoki aplikacji
+## Zrzuty ekranu
 
 ### Strona główna
-![Strona glowna](docs/screens/strona_glowna.png)
-### Wyszukiwarka przepisów
-![Wyszukiwarka](docs/screens/wyszukiwarka.png)
-### Szczegóły przepisu
-![Szczegoly przepisu](docs/screens/strona_z_przepisem.png)
 
-## Ulubione przepisy
-![Ulubione przepisy](docs/screens/ulubione.png)
+![Strona główna](docs/screens/strona_glowna.png)
+
+### Jak to działa
+
+![Jak to działa](docs/screens/jak_to_dziala.png)
 
 ### Logowanie
+
 ![Logowanie](docs/screens/logowanie_2.png)
 
 ### Rejestracja
+
 ![Rejestracja](docs/screens/rejestracja_2.png)
 
-### Strona witająca użytkownika
-![Welcome page](docs/screens/welcome_page.png)
+### Welcome Page
 
-### Podstrona jak to działa 
-![Jak to dziala](docs/screens/jak_to_dziala.png)
+![Welcome](docs/screens/welcome_page.png)
 
-### Podstrona o nas
+### Szczegóły przepisu
+
+![Przepis](docs/screens/strona_z_przepisem.png)
+
+### Ulubione
+
+![Ulubione](docs/screens/ulubione.png)
+
+### O nas
+
 ![O nas](docs/screens/o_nas.png)
 
-## Integracje
+---
 
-### Firebase
-![Firebase](docs/screens/firebase.png)
-![Firebase](docs/screens/firebase-autentication.png)
+## Analityka
 
-### Google Analytics
-![Google Analytics](docs/screens/google-analitics-overview.png)
-![Google Analytics](docs/screens/google-analitics-overview-2.png)
-![Google Analytics](docs/screens/google-analitics-debug.png)
+### Firebase Analytics
 
-### Hotjar
+Monitorowanie:
+
+- odwiedzanych stron
+- aktywności użytkowników
+- zdarzeń aplikacji
+
+#### Firebase Analytics
+
+![Firebase Analytics](docs/screens/google-analitics-overview.png)
+
+![Firebase Analytics 2](docs/screens/google-analitics-overview-2.png)
+
+---
+
+### Hotjar / Contentsquare
+
+Monitorowanie:
+
+- heatmap
+- nagrań sesji
+- zachowania użytkowników
+
 ![Hotjar](docs/screens/hotjar.png)
 
-### Deployment na vertel
-![Deployment](docs/screens/deploy_strona_vertel.png)
-https://co-mam-w-lodowce.vercel.app/
+---
 
+## Deployment
+
+Aplikacja została wdrożona przy pomocy platformy Vercel.
+
+### Wdrożenie
+
+![Vercel](docs/screens/deploy_strona_vertel.png)
+
+---
 
 ## Autorzy
 
@@ -189,6 +280,8 @@ https://co-mam-w-lodowce.vercel.app/
 - Tomasz Gondek
 - Adam Bahonko
 
-Politechnika Krakowska  
-Techniki Projektowania Frontendowego  
-2026
+Projekt wykonany w ramach przedmiotu:
+
+**Techniki Projektowania Frontendowego**
+
+Kraków, 2026
