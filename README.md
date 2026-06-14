@@ -1,4 +1,4 @@
-# 🧊 Co Mam w Lodówce?
+#  Co Mam w Lodówce?
 
 Aplikacja webowa wspomagająca zarządzanie zawartością lodówki oraz wyszukiwanie przepisów kulinarnych na podstawie dostępnych składników.
 
@@ -6,8 +6,9 @@ Projekt został wykonany w ramach przedmiotu **Techniki Projektowania Frontendow
 
 ---
 
-## 🌐 Wersja produkcyjna
+## Wersja produkcyjna
 
+Wersja produkcyjna aplikacji znajduje się pod adresem:
 https://co-mam-w-lodowce.vercel.app/
 
 ---
@@ -65,7 +66,7 @@ Dzięki temu aplikacja może działać zarówno w trybie lokalnym jak i przy wyk
 
 ---
 
-## 🔐 Firebase
+## Firebase
 
 Projekt wykorzystuje następujące usługi Firebase:
 
